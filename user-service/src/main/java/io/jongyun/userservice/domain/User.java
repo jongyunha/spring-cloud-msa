@@ -6,9 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class User {
@@ -29,7 +32,4 @@ public class User {
     @Column(nullable = false)
     private String encryptedPwd;
 
-    public void setEncryptedPwd(String encryptedPwd) {
-        this.encryptedPwd = encryptedPwd;
-    }
 }

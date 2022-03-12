@@ -21,10 +21,13 @@ public class UserServiceImpl implements UserService {
     public UserDto create(UserDto userDto) {
         userDto.setUserId(UUID.randomUUID().toString());
         ModelMapper mapper = new ModelMapper();
+
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        User userEntity = mapper.map(userDto, User.class);
-        userEntity.setEncryptedPwd("encrypted_password");
-        userRepository.save(userEntity);
-        return null;
+        User user = mapper.map(userDto, User.class);
+
+        user.setEncryptedPwd("encrypted_password");
+        userRepository.save(user);
+
+        return mapper.map(user, UserDto.class);
     }
 }
