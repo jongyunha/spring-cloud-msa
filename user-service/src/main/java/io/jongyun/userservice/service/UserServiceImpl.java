@@ -1,13 +1,19 @@
 package io.jongyun.userservice.service;
 
 import io.jongyun.userservice.domain.User;
+import io.jongyun.userservice.dto.ResponseOrder;
 import io.jongyun.userservice.dto.UserDto;
 import io.jongyun.userservice.repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +37,23 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return mapper.map(user, UserDto.class);
+    }
+
+    @Override
+    public UserDto getUserByUserId(String userId) {
+        User user = userRepository.findByUserId(userId);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        UserDto userDto = new ModelMapper().map(user, UserDto.class);
+        List<ResponseOrder> orders = new ArrayList<>();
+        userDto.setOrders(orders);
+        return userDto;
+    }
+
+    @Override
+    public Iterable<User> getUserByAll() {
+        return userRepository.findAll();
     }
 }
