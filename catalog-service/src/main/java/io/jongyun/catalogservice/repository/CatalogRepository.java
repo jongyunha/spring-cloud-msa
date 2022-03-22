@@ -8,7 +8,7 @@ import java.util.Optional;
 /**
  * @author jongyunha created on 22. 3. 22.
  */
-public interface CatalogRepository extends JpaRepository<CatalogRepository, Long> {
+public interface CatalogRepository extends JpaRepository<Catalog, Long> {
 
     Optional<Catalog> findByProductId(String productId);
 }
