@@ -7,12 +7,14 @@ import io.jongyun.userservice.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import javax.transaction.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -55,5 +57,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public Iterable<User> getUserByAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<User> byEmail = userRepository.findByEmail(username);
+        if (byEmail.isEmpty()) {
+            throw new UsernameNotFoundException(username);
+        }
+        User user = byEmail.get();
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),
+            user.getEncryptedPwd(), true, true, true, true, new ArrayList<>());
     }
 }
