@@ -1,6 +1,6 @@
 package io.jongyun.catalogservice.service;
 
-import io.jongyun.catalogservice.entity.Catalog;
+import io.jongyun.catalogservice.domain.Catalog;
 
 import java.util.List;
 

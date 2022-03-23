@@ -1,4 +1,4 @@
-package io.jongyun.catalogservice.entity;
+package io.jongyun.catalogservice.domain;
 
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;

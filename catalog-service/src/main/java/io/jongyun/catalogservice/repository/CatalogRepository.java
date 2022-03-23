@@ -1,6 +1,6 @@
 package io.jongyun.catalogservice.repository;
 
-import io.jongyun.catalogservice.entity.Catalog;
+import io.jongyun.catalogservice.domain.Catalog;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

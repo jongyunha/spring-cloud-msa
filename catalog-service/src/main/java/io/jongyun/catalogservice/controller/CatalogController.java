@@ -1,6 +1,6 @@
 package io.jongyun.catalogservice.controller;
 
-import io.jongyun.catalogservice.entity.Catalog;
+import io.jongyun.catalogservice.domain.Catalog;
 import io.jongyun.catalogservice.service.CatalogService;
 import io.jongyun.catalogservice.vo.ResponseCatalog;
 import lombok.RequiredArgsConstructor;
