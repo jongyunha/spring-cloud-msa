@@ -2,9 +2,11 @@ package io.jongyun.userservice.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jongyun.userservice.dto.RequestLogin;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 /**
  * @author jongyunha created on 22. 3. 24.
  */
+@Slf4j
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
@@ -41,5 +44,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         FilterChain chain,
         Authentication authResult)
         throws IOException, ServletException {
+        log.info(((User) authResult.getPrincipal()).getUsername());
+        log.info(((User) authResult.getPrincipal()).getPassword());
     }
 }
