@@ -2,7 +2,12 @@ package io.jongyun.userservice.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jongyun.userservice.dto.RequestLogin;
+import io.jongyun.userservice.dto.UserDto;
+import io.jongyun.userservice.service.UserService;
+
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -21,6 +26,17 @@ import java.util.ArrayList;
  */
 @Slf4j
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    private UserService userService;
+    private Environment env;
+
+    public AuthenticationFilter(
+        AuthenticationManager authenticationManager,
+        UserService userService, Environment env) {
+        super.setAuthenticationManager(authenticationManager);
+        this.userService = userService;
+        this.env = env;
+    }
 
     @Override
     public Authentication attemptAuthentication(
@@ -45,6 +61,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         Authentication authResult)
         throws IOException, ServletException {
         log.info(((User) authResult.getPrincipal()).getUsername());
-        log.info(((User) authResult.getPrincipal()).getPassword());
+        String username = ((User) authResult.getPrincipal()).getUsername();
+        UserDto userDetails = userService.getUserDetailsByEmail(username);
     }
 }
