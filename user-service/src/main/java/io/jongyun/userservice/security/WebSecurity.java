@@ -19,7 +19,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final Environment env;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
