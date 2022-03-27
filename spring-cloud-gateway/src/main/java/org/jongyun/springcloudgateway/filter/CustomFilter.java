@@ -8,36 +8,36 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-/**
- * @author jongyunha on 3/11/22.
- */
+/** @author jongyunha on 3/11/22. */
 @Component
 @Slf4j
 public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Config> {
 
-    public CustomFilter() {
-        super(Config.class);
-    }
+  public CustomFilter() {
+    super(Config.class);
+  }
 
-    @Override
-    public GatewayFilter apply(Config config) {
-        // Custom Pre filter
-        return (exchange, chain) -> {
-            ServerHttpRequest request = exchange.getRequest();
-            ServerHttpResponse response = exchange.getResponse();
+  @Override
+  public GatewayFilter apply(Config config) {
+    // Custom Pre filter
+    return (exchange, chain) -> {
+      ServerHttpRequest request = exchange.getRequest();
+      ServerHttpResponse response = exchange.getResponse();
 
-            log.info("Custom PRE filter: reqeust id = {}", request.getId());
+      log.info("Custom PRE filter: reqeust id = {}", request.getId());
 
-            // Custom Post filter
-            return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                log.info("Custom POST filter : response code = {}", response.getStatusCode());
-            }));
-        };
-    }
+      // Custom Post filter
+      return chain
+          .filter(exchange)
+          .then(
+              Mono.fromRunnable(
+                  () -> {
+                    log.info("Custom POST filter : response code = {}", response.getStatusCode());
+                  }));
+    };
+  }
 
-
-    public static class Config {
-        // put the configuration properties
-    }
-
+  public static class Config {
+    // put the configuration properties
+  }
 }
