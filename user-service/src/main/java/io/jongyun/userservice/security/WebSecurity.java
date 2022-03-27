@@ -18,7 +18,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private Environment env;
 
-    public WebSecurity(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder, Environment env) {
+    public WebSecurity(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder,
+        Environment env) {
         this.userService = userService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.env = env;
@@ -34,8 +35,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/users/**").permitAll();
         http.authorizeRequests()
-            .antMatchers("**")
-            .hasIpAddress("127.0.0.1")
+            .antMatchers("/**")
+            .hasIpAddress("0.0.0.0/0")
             .and()
             .addFilter(getAuthenticationFilter());
 
