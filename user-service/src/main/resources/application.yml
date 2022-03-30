@@ -31,4 +31,4 @@ greeting:
 
 token:
   expiration_time: 86400000 # one day
-  secret: user_token
+  secret: fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5

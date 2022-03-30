@@ -15,7 +15,7 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: false
           lower-case-service-id: true
       default-filters:
         - name: GlobalFilter
@@ -50,7 +50,6 @@ spring:
             - Path=/user-service/**
             - Method=GET
           filters:
-            - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AuthorizationHeaderFilter
         - id: catalog-service
@@ -80,4 +79,4 @@ spring:
             - CustomFilter
 
 token:
-  secret: user_token
+  secret: fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5
