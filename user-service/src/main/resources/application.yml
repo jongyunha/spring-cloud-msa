@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8010
 
 spring:
   application:
@@ -29,6 +29,13 @@ eureka:
 greeting:
   message: Welcome to the Simple E-commerce
 
-token:
-  expiration_time: 86400000 # one day
-  secret: fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, info
+
+#token:
+#  expiration_time: 86400000 # one day
+#  secret: fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5

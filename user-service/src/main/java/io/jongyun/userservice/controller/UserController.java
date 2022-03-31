@@ -4,7 +4,6 @@ import io.jongyun.userservice.domain.User;
 import io.jongyun.userservice.dto.RequestUserDto;
 import io.jongyun.userservice.dto.ResponseUserDto;
 import io.jongyun.userservice.dto.UserDto;
-import io.jongyun.userservice.service.UserService;
 import io.jongyun.userservice.service.UserServiceImpl;
 import io.jongyun.userservice.vo.Greeting;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,6 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,10 +23,18 @@ public class UserController {
 
     private final Greeting greeting;
     private final UserServiceImpl userService;
+    private final Environment env;
 
     @GetMapping("/health_check")
     public String status() {
-        return "It's Working in User service on PORT";
+        return String.format("It's Working in User service on PORT"
+                + "port(local.server.port)=%s"
+                + ", token secret=%s"
+                + ", token expiration time=%s",
+            env.getProperty("local.server.port"),
+            env.getProperty("token.secret"),
+            env.getProperty("token.expiration_time")
+        );
     }
 
     @GetMapping("/welcome")
