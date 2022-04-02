@@ -6,4 +6,8 @@ spring:
     config:
       server:
         git:
-          uri: file:////home/jongyunha/Documents/code/msa-config
+          # uri: file:////home/jongyunha/Documents/code/msa-config
+          uri: https://github.com/nothingprogram/spring-cloud-config.git
+          # username: [ your username ]
+          # password: [ your password ]
+
