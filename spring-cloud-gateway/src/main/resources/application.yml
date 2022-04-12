@@ -27,7 +27,7 @@ spring:
           args:
             baseMessage: Spring Cloud Gateway Global
             preLogger: true
-      #            postLogger: true
+            postLogger: true
       routes:
         #        - id: user-service
         #          uri: lb://USER-SERVICE
