@@ -1,9 +1,8 @@
 package io.jongyun.orderservice.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
-
 import java.util.Date;
+import lombok.Data;
 
 /**
  * @author jongyunha created on 22. 3. 22.
@@ -18,5 +17,5 @@ public class ResponseOrder {
     private Integer totalPrice;
 
     private Date createdAt;
-    private Integer orderId;
+    private String orderId;
 }

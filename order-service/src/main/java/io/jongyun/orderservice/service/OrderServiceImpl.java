@@ -3,20 +3,20 @@ package io.jongyun.orderservice.service;
 import io.jongyun.orderservice.domain.Order;
 import io.jongyun.orderservice.dto.OrderDto;
 import io.jongyun.orderservice.repository.OrderRepository;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author jongyunha created on 22. 3. 23.
  */
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
