@@ -1,6 +1,5 @@
 package io.jongyun.userservice.service;
 
-import feign.FeignException.FeignClientException;
 import io.jongyun.userservice.client.OrderServiceClient;
 import io.jongyun.userservice.domain.User;
 import io.jongyun.userservice.dto.ResponseOrder;
@@ -65,12 +64,7 @@ public class UserServiceImpl implements UserService {
 //            });
 //        List<ResponseOrder> ordersList = orderListResponse.getBody();
 
-        List<ResponseOrder> orders = null;
-        try {
-            orders = orderServiceClient.getOrders(userId);
-        } catch (FeignClientException ex) {
-            log.error(ex.getMessage());
-        }
+        List<ResponseOrder> orders = orderServiceClient.getOrders(userId);
         userDto.setOrders(orders);
         return userDto;
     }

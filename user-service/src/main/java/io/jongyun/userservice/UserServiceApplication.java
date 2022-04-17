@@ -33,4 +33,5 @@ public class UserServiceApplication {
     public Logger.Level feignLoggerLevel() {
         return Level.FULL;
     }
+
 }
