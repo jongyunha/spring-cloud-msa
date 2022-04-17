@@ -11,7 +11,7 @@ import java.util.List;
 public interface OrderService {
     OrderDto createOrder(OrderDto orderDetails);
 
-    OrderDto getOrderByOrderId(String orderId);
+    OrderDto getOrderByOrderId(String orderId) throws Exception;
 
-    List<Order> getOrdersByUserId(String userId);
+    List<Order> getOrdersByUserId(String userId) throws Exception;
 }

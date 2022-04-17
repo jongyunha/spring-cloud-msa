@@ -9,6 +9,12 @@ spring:
     password: guest
   application:
     name: user-service
+  zpikin:
+    base-url: http://127.0.0.1:9411
+    enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
   datasource:
     url: jdbc:h2:tcp://localhost/~/user-service
     username: sa
@@ -44,7 +50,7 @@ management:
 #token:
 #  expiration_time: 86400000 # one day
 #  secret: fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5fa3a047704dc4cf2bc9c238294906ff5
-
-logging:
-  level:
-    io.jongyun.userservice.client: DEBUG
+#
+#logging:
+#  level:
+#    io.jongyun.userservice.client: DEBUG

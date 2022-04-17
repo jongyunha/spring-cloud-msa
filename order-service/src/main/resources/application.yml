@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: order-service
+  zpikin:
+    base-url: http://127.0.0.1:9411
+    enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
   datasource:
     url: jdbc:h2:tcp://localhost/~/user-service
     username: sa
@@ -29,6 +35,6 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
-logging:
-  level:
-    io.jongyun.orderservice: DEBUG
+#logging:
+#  level:
+#    io.jongyun.orderservice: DEBUG

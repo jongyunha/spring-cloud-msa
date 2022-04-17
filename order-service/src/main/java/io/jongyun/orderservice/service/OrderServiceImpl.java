@@ -6,6 +6,8 @@ import io.jongyun.orderservice.repository.OrderRepository;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author jongyunha created on 22. 3. 23.
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -37,13 +40,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto getOrderByOrderId(String orderId) {
+    public OrderDto getOrderByOrderId(String orderId) throws Exception{
         Order order = orderRepository.findByOrderId(orderId).orElseThrow(RuntimeException::new);
         return new ModelMapper().map(order, OrderDto.class);
     }
 
     @Override
-    public List<Order> getOrdersByUserId(String userId) {
+    public List<Order> getOrdersByUserId(String userId) throws Exception{
+        log.info("Before retrieve orders data");
+        try {
+            Thread.sleep(1);
+            throw new Exception("장애 발생");
+        } catch (InterruptedException e) {
+            log.warn(e.getMessage());
+        }
+        log.info("After retrieve orders data");
         return orderRepository.findAllByUserId(userId);
     }
 }

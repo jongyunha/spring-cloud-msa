@@ -55,9 +55,9 @@ public class OrderController {
     }
 
     @GetMapping("/{userId}/orders")
-    public ResponseEntity<List<ResponseOrder>> createOrder(
+    public ResponseEntity<List<ResponseOrder>> getOrders(
         @PathVariable(value = "userId") String userId
-    ) {
+    ) throws Exception {
         List<Order> ordersByUserId = orderService.getOrdersByUserId(userId);
         List<ResponseOrder> result = ordersByUserId.stream().map(order -> {
             return new ModelMapper().map(order, ResponseOrder.class);
