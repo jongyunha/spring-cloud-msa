@@ -108,6 +108,10 @@
       <artifactId>spring-cloud-starter-sleuth</artifactId>
       <groupId>org.springframework.cloud</groupId>
     </dependency>
+    <dependency>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+      <groupId>io.micrometer</groupId>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>

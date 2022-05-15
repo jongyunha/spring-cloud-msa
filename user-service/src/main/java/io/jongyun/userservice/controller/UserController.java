@@ -6,16 +6,20 @@ import io.jongyun.userservice.dto.ResponseUserDto;
 import io.jongyun.userservice.dto.UserDto;
 import io.jongyun.userservice.service.UserServiceImpl;
 import io.jongyun.userservice.vo.Greeting;
+import io.micrometer.core.annotation.Timed;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +30,7 @@ public class UserController {
     private final Environment env;
 
     @GetMapping("/health_check")
+    @Timed(value = "users.stats", longTask = true)
     public String status() {
         return String.format("It's Working in User service on PORT"
                 + "port(local.server.port)=%s"
@@ -38,6 +43,7 @@ public class UserController {
     }
 
     @GetMapping("/welcome")
+    @Timed(value = "users.welcome", longTask = true)
     public String welcome() {
         return greeting.getMessage();
     }
